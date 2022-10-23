@@ -1,0 +1,64 @@
+<h3>Angular HTTP POST</h3>
+<p *ngIf="dataSaved" ngClass="Success">
+    Record saved suceessfully
+</p>
+<form [formGroup]="bookForm" (ngSubmit)="onFormSubmit()">
+    <table>
+        <tr>
+        <td>Name:</td>
+        <td>
+            <input formControlName="name">
+        </td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td>
+                <input formControlName="category">
+            </td>
+        </tr>
+        <tr>
+            <td>Writer:</td>
+            <td>
+                <input formControlName="writer">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button class="btn btn-primary" [disabled]="bookForm.invalid">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<h3>View</h3>
+<!-- <table>
+    <tr><th>Id</th><th>Name</th><th>Category</th><th>Writer</th></tr>
+    <tr *ngFor="let book of allbooks | async">
+        <td>{{book.id}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.category}}</td>
+        <td>{{book.writer}}</td>
+    </tr>
+</table> -->
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Writer</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of allbooks | async">
+        <th>{{book.id}}</th>
+        <td>{{book.name}}</td>
+        <td>{{book.category}}</td>
+        <td>{{book.writer}}</td>
+        <td><button type="button" (click)="bookToEdit(book.id)" class="btn btn-success">Edit</button>&nbsp;
+        <button type="button" (click)="bookToDelete(book.id)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
